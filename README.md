@@ -1,26 +1,20 @@
 # ReProcFin
 
-# Proposta: Arquitetura de Extração, Armazenamento, Transformação e Visualização de Dados Financeiros
+## Proposta: Arquitetura de Extração, Armazenamento, Transformação e Visualização de Dados Financeiros
 
-## Visão Geral
-Este projeto visa desenvolver uma arquitetura integrada para **extração, armazenamento, transformação e visualização de dados financeiros**, utilizando tecnologias modernas. O sistema será modular, dividido em serviços independentes que colaboram para extrair dados financeiros, verificar logs, transformar dados processáveis e apresentar visualizações interativas.
+### Visão Geral
+Este projeto visa desenvolver uma arquitetura integrada para **extração, armazenamento, transformação e visualização de dados financeiros**, utilizando tecnologias modernas. O sistema será modular, dividido em serviços independentes que colaboram para:
 
----
+1. **Extrair dados financeiros de APIs externas**.
+2. **Centralizar logs de execução e comunicação**.
+3. **Transformar dados em formatos processados e utilizáveis**.
+4. **Visualizar informações financeiras de forma interativa**.
 
-## Componentes da Arquitetura
-
-### 1. **Bot de Extração de Dados**
-- **Responsabilidade**: Consumir a API HG Finance para extrair dados financeiros e armazená-los em uma camada de dados brutos.
-- **Entrada (INPUT)**:
-  - Dados fornecidos pela API HG Finance, como:
-    - Índices financeiros (IBOVESPA, NASDAQ, etc.).
-    - Cotações de moedas (USD, EUR, BTC).
-    - Taxas de juros (CDI, Selic, etc.).
-  - Requisições autenticadas com a **chave de API**.
-- **Saída (OUTPUT)**:
-  - Dados financeiros armazenados em um banco de dados bruto.
-  - Logs de execução enviados ao serviço de **Logs**.
-- **Mensageria**: RabbitMQ será utilizado para envio e consumo dos logs.
+#### Mensageria
+O **RabbitMQ** será utilizado como **sistema central de mensageria** para garantir a comunicação confiável entre os serviços:
+- **Bot de Extração** envia mensagens de logs e confirmações de novos dados extraídos.
+- **Transformação de Dados** escuta mensagens para processar dados recém-extraídos.
+- **Logs Centralizados** mantêm o histórico de execução para monitoramento e auditoria.
 
 ---
 
