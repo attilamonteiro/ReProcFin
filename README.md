@@ -18,6 +18,23 @@ O **RabbitMQ** será utilizado como **sistema central de mensageria** para garan
 
 ---
 
+## Componentes da Arquitetura
+
+### 1. **Bot de Extração de Dados**
+- **Responsabilidade**: Consumir a API HG Finance para extrair dados financeiros e armazená-los em uma camada de dados brutos.
+- **Entrada (INPUT)**:
+  - Dados fornecidos pela API HG Finance, como:
+    - Índices financeiros (IBOVESPA, NASDAQ, etc.).
+    - Cotações de moedas (USD, EUR, BTC).
+    - Taxas de juros (CDI, Selic, etc.).
+  - Requisições autenticadas com a **chave de API**.
+- **Saída (OUTPUT)**:
+  - Dados financeiros armazenados em um banco de dados bruto.
+  - Logs de execução enviados ao serviço de **Logs** via **RabbitMQ**.
+- **Mensageria**: RabbitMQ será utilizado para envio e consumo dos logs.
+
+---
+
 ### 2. **Transformação de Dados**
 - **Responsabilidade**: Verificar no serviço de **Logs** se há novos dados e processá-los em formato utilizável.
 - **Fluxo de Operação**:
